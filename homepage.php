@@ -27,20 +27,19 @@ require_once("crud.php");
         <form action="" method="post">
 
 
+            <button type="submit" value="" name="create" class="btn  btn-primary ">create new
+                user
+            </button>
 
-                <button type="submit" value="" name="create" class="btn  btn-primary ">create new
-                    user
-                </button>
-
-                <button type="submit" value="" name="update" class="btn btn-primary ">update
-                    existing user
-                </button>
-                <button type="submit" value="" name="read" class="btn btn-primary  btn-large">see all
-                    users
-                </button>
-                <button type="submit" value="" name="delete" class="btn btn-primary  btn-large">delete user
-                    using id
-                </button>
+            <button type="submit" value="" name="update" class="btn btn-primary ">update
+                existing user
+            </button>
+            <button type="submit" value="" name="read" class="btn btn-primary  btn-large">see all
+                users
+            </button>
+            <button type="submit" value="" name="delete" class="btn btn-primary  btn-large">delete user
+                using id
+            </button>
 
 
             <input type="number" name="Id" placeholder="Azubis Id here.." class="form-control">
@@ -52,7 +51,6 @@ require_once("crud.php");
             <input type="text" name="FirstName" placeholder="Azubis firstname here.." class="form-control">
 
             <input type="text" name="LastName" placeholder="Azubis lastname here.." class="form-control">
-
 
 
         </form>
@@ -68,7 +66,7 @@ require_once("crud.php");
         </tr>
         <?php
         $conn = createConnection();
-        $query = "SELECT * FROM Persons";
+        $query = "SELECT * FROM User";
         $result = $conn->query($query);
 
         if ($result->num_rows > 0) {
