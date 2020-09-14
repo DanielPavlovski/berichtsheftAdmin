@@ -34,9 +34,8 @@ require_once("crud.php");
             <button type="submit" value="" name="update" class="btn btn-primary ">update
                 existing user
             </button>
-            <button type="submit" value="" name="read" class="btn btn-primary  btn-large">see all
-                users
-            </button>
+
+
             <button type="submit" value="" name="delete" class="btn btn-primary  btn-large">delete user
                 using id
             </button>
@@ -60,7 +59,7 @@ require_once("crud.php");
         <tr>
             <th>ID</th>
             <th>Username</th>
-            <th>Password</th>
+
             <th>Firstname</th>
             <th>Lastname</th>
         </tr>
@@ -72,7 +71,7 @@ require_once("crud.php");
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
 
-                echo "<tr><td> " . $row["ID"] . "</td><td>" . $row["Username"] . "</td><td>" . $row["Password"] . "</td><td>" . $row["Name"] . "</td><td>" . $row ["Lastname"] . "</td></tr>";
+                echo "<tr><td> " . $row["ID"] . "</td><td>" . $row["Username"] . "</td><td>" . $row["Name"] . "</td><td>" . $row ["Lastname"] . "</td></tr>";
 
             }
 
