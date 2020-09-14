@@ -32,7 +32,7 @@ function createUser()
     $lastname = $_POST['LastName'];
 
 
-    $query = "INSERT into Persons (Username,Password,Name,Lastname) values ('$username','$password','$firstname','$lastname')";
+    $query = "INSERT into User (Username,Password,Name,Lastname) values ('$username','$password','$firstname','$lastname')";
     $mysql = mysqli_query($conn, $query) or die (mysqli_error($conn));
 
     if ($mysql) {
@@ -52,7 +52,7 @@ function deleteUser()
 
     $conn = createConnection();
     $id = $_POST['Id'];
-    $query = "DELETE FROM Persons WHERE id = " . $id;
+    $query = "DELETE FROM User WHERE id = " . $id;
     $mysql = mysqli_query($conn, $query) or die (mysqli_error($conn));
     if ($mysql) {
 
@@ -71,7 +71,7 @@ function readAllUsers()
 
     $conn = createConnection();
     $query = "SELECT ID, Username, Password, Name, Lastname
-FROM Persons";
+FROM User";
 
 
     $mysql = mysqli_query($conn, $query) or die (mysqli_error($conn));
@@ -101,7 +101,7 @@ $conn = createConnection();
     $lastname = $_POST['LastName'];
 
 
-$query = "UPDATE Persons
+$query = "UPDATE User
 SET Username='" . $username ."', Password='".$password."', Name='".$firstname."', Lastname='".$lastname.
 "'WHERE id=" . $id;
 
