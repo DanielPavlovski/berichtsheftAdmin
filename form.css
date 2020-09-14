@@ -1,0 +1,59 @@
+body {
+
+
+    background:url('http://clevertechie.com/img/bnet-bg.jpg') #0f2439 no-repeat center top;
+
+}
+
+
+
+
+
+.login_form{
+    margin-top:350px ;
+box-sizing: content-box;
+}
+
+input {
+    width: 100%;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+}
+#login_name{
+
+    margin-left: 122px;
+    font-family: 'Julius Sans One', sans-serif;
+}
+.login_form_home{
+
+
+}
+
+#admin_panel{
+    font-family: 'Julius Sans One', sans-serif;
+    margin-left: 420px;
+    margin-top: 50px;
+}
+
+button{
+    width: 24.7%;
+
+}
+
+table,td ,tr ,  th{
+
+    border: solid black;
+    border-bottom: black solid;
+    background-color: white;
+
+}
+table{
+    width: 100%;
+    margin-top: 30px;
+}
+h1{
+    color: white;
+}
+
