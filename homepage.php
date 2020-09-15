@@ -92,14 +92,14 @@ require_once("crud.php");
                                     title="delete selected user"><i class="fas fa-trash-alt"></i></button>
 
 
-                        </form>
+
                     </td>
 
 
 
 
                 </tr>
-
+                </form>
 
                 <?php
             }

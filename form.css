@@ -1,7 +1,7 @@
 body {
 
 
-    background: url('http://clevertechie.com/img/bnet-bg.jpg') #0f2439 no-repeat center top;
+    background: url('http://clevertechie.com/img/bnet-bg.jpg') #0f2439 no-repeat;
 
 
 }
@@ -42,10 +42,9 @@ input {
 
 table, td, tr, th {
 
-    border: solid black;
-    border-bottom: black solid;
 
-    background-color: white;
+
+    color: white;
 
 }
 
@@ -64,5 +63,5 @@ h1 {
 
 .action_buttons {
 
-background-color: #000088;
+background-color: unset;
 }
