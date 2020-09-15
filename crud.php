@@ -35,12 +35,7 @@ function createUser()
     $query = "INSERT into User (Username,Password,Name,Lastname) values ('$username','$password','$firstname','$lastname')";
     $mysql = mysqli_query($conn, $query) or die (mysqli_error($conn));
 
-    if ($mysql) {
 
-        echo "success";
-    } else {
-        echo "error";
-    }
     $conn->close();
 
 
@@ -51,7 +46,7 @@ function deleteUser()
 {
 
     $conn = createConnection();
-    $id = $_POST['Id'];
+    $id = $_POST['key_to_delete'];
     $query = "DELETE FROM User WHERE id = " . $id;
     $mysql = mysqli_query($conn, $query) or die (mysqli_error($conn));
     if ($mysql) {
@@ -90,9 +85,10 @@ FROM User";
 
 }
 
-function updateUser(){
+function updateUser()
+{
 
-$conn = createConnection();
+    $conn = createConnection();
 
     $id = $_POST['Id'];
     $username = $_POST['Username'];
@@ -101,10 +97,9 @@ $conn = createConnection();
     $lastname = $_POST['LastName'];
 
 
-$query = "UPDATE User
-SET Username='" . $username ."', Password='".$password."', Name='".$firstname."', Lastname='".$lastname.
-"'WHERE id=" . $id;
-
+    $query = "UPDATE User
+SET Username='" . $username . "', Password='" . $password . "', Name='" . $firstname . "', Lastname='" . $lastname .
+        "'WHERE id=" . $id;
 
 
     $mysql = mysqli_query($conn, $query) or die (mysqli_error($conn));
@@ -119,23 +114,24 @@ SET Username='" . $username ."', Password='".$password."', Name='".$firstname."'
 
 }
 
-function crud () {
-if (isset($_POST['create'])) {
-    createUser();
-} else if (isset($_POST['delete'])) {
+function crud()
+{
+    if (isset($_POST['create'])) {
+        createUser();
+    } else if (isset($_POST['delete_button'])) {
 
-     deleteUser();
-} else if (isset($_POST['read'])) {
-    readAllUsers();
-}else if (isset($_POST['update'])) {
-    updateUser();
+        deleteUser();
+    } else if (isset($_POST['read'])) {
+        readAllUsers();
+    } else if (isset($_POST['update'])) {
+        updateUser();
+
+    }
+
 
 }
 
-
-
-
-}
+//print_r($_POST);
 
 crud();
 
