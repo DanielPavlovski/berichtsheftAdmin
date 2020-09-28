@@ -1,6 +1,56 @@
 <?php
 
-require_once("crud.php");
+#require_once("crud.php");
+require_once("ConnectionHandler.php");
+
+function getDataById($id)
+{
+    $con = ConnectionHandler::createConnection('berichtsheftPlayground');
+    $result = $con->query("SELECT *
+    FROM Azubis a 
+    where ID = " . $_POST['edit-id']);
+    return $result->fetch_assoc();
+}
+
+function updateRow($username,$password,$name,$lastname,$id){
+    $con = ConnectionHandler::createConnection('berichtsheftPlayground');
+    $sql="update `Azubis` set `Username`=?,`Password`=?,`Name`=?,`Lastname`=? where `id`=?";
+    if(!$stmt=$con->prepare($sql)){
+        echo $con->error;
+    };
+
+    $stmt->bind_param('ssssi',$username,$password,$name,$lastname,$id);
+    $stmt->execute();
+
+}
+
+function deleteRow(){
+    $con=ConnectionHandler::createConnection('berichtsheftPlayground');
+    $sql="DELETE FROM Azubis where id=?";
+}
+
+$username = null;
+$pw = null;
+$name = null;
+$lastname = null;
+if (isset($_POST['edit_button'])) {
+    $data = getDataById($_POST['edit-id']);
+    $username = $data['Username'];
+    $pw = $data['Password'];
+    $name = $data['Name'];
+    $lastname = $data['Lastname'];
+}
+
+if(isset($_POST['save-edit'])){
+    $username = $_POST['Username'];
+    $pw = $_POST['Password'];
+    $name = $_POST['FirstName'];
+    $lastname = $_POST['LastName'];
+    $id=$_POST['id'];
+    updateRow($username,$pw,$name,$lastname,$id);
+}
+
+
 ?>
 
 <!doctype html>
@@ -13,7 +63,8 @@ require_once("crud.php");
     <link rel="stylesheet" href="form.css">
     <script src="https://kit.fontawesome.com/abbbcfcd25.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
@@ -21,94 +72,83 @@ require_once("crud.php");
 
 
 <div class="container">
-
-
-    <div class="login_form_home">
-        <h1 id="admin_panel">ADMIN PANEL</h1>
-        <form action="" method="post">
-
-
-            <button type="submit" value="" name="create" class="btn  btn-primary create_button bg-danger"
-                    title="create new user"><i class="fas fa-plus"></i>
-            </button>
-
-
-            <input type="text" name="Username" placeholder="Azubis Username here.." class="form-control" required>
-
-            <input type="password" name="Password" placeholder="Azubis Password here.." class="form-control" required
-            >
-            <input type="text" name="FirstName" placeholder="Azubis firstname here.." class="form-control" required>
-
-            <input type="text" name="LastName" placeholder="Azubis lastname here.." class="form-control" required>
-
-
-
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <h1>ADMIN PANEL</h1>
+        </div>
     </div>
+    <div class="login_form_home">
 
+        <form action="" method="post">
+            <div class="d-flex justify-content-end">
+            <button type="submit" value="" name="create" class="btn btn-primary bg-danger"
+                    title="create new user"><i class="fa fa-plus"></i>
+            </div>
+            </button>
+            <input type="text"
+                   name="Username"
+                <?php echo $username != null ? "value= $username" : 'placeholder="Azubis Username here.."'; ?>
+                   class="form-control" required>
+            <input type="password" name="Password"
+                <?php echo $pw != null ? "value= $pw" : 'placeholder="Azubis Password here.."'; ?>
+                   class="form-control" required>
+            <input type="text" name="FirstName"
+                <?php echo $name != null ? "value= $name" : 'placeholder="Azubis firstname here.."'; ?>
+                   class="form-control" required>
+            <input type="text" name="LastName"
+                <?php echo $lastname != null ? "value= $lastname" : 'placeholder="Azubis lastname here.."'; ?>
+                   class="form-control" required>
+            <input type="hidden" name="id" value="<?php echo $_POST['edit-id']; ?>" />
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-success " type="submit" name="save-<?php echo $_POST['edit_button'] ?>"><i
+                            class="fas fa-save"> Save</i>
+                </button>
+            </div>
+        </form>
+    </div>
     <table>
         <tr>
             <th>ID</th>
             <th>Username</th>
-
             <th>Firstname</th>
             <th>Lastname</th>
-
+            <th></th>
+            <th></th>
         </tr>
         <?php
-
-        $conn = createConnection();
-        $query = "SELECT * FROM User";
+        $conn = ConnectionHandler::createConnection('berichtsheftPlayground');
+        $query = "SELECT * FROM Azubis";
         $result = $conn->query($query);
-
         if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) { ?>
-
-
-                    <tr>
-
-                        <td><?php echo $row['ID']; ?></td>
-                        <td><?php echo $row['Username']; ?></td>
-                        <td><?php echo $row['Name']; ?></td>
-                        <td><?php echo $row['Lastname']; ?></td>
-
-
-                        <td><input type="checkbox" class="" name="key_to_delete" value="<?php echo $row['ID']; ?>"
-                                   required>
-                        </td>
-
-                        <td class="action_buttons">
-
-
-                            <button type="submit" name="edit_button" title="edit selected user" value="edit"
-                                    class="btn  btn-primary bg-warning">
-                                <i class="fas fa-user-edit"></i>
-                            </button>
-
-
-                            <button type="submit" name="delete_button" value="delete"
-                                    class="btn  btn-primary  bg-danger"
-                                    title="delete selected user"><i class="fas fa-trash-alt"></i></button>
-
-
-                        </td>
-
-
-                    </tr>
-                </form>
-
-                <?php
+            while ($row = $result->fetch_assoc()) {
+                echo '<tr>
+                    <td>' . $row['ID'] . '</td>
+                    <td>' . $row['Username'] . '</td>
+                    <td>' . $row['Name'] . '</td>
+                    <td>' . $row['Lastname'] . '</td>                    
+                    <td class="action_buttons">
+                    <form action="" method="post">
+                        <button type="submit" name="edit_button" title="edit selected user" value="edit"
+                                class="btn  btn-primary bg-warning">
+                            <i class="fas fa-user-edit"> Edit</i>
+                        </button>
+                        <input type="hidden" name="edit-id" value="' . $row['ID'] . '">
+                    <form>
+                    </td>
+                    <td class="action_buttons">
+                      <form action="" method="post">
+                        <button type="submit" name="delete_button" value="delete"
+                                class="btn  btn-primary  bg-danger"
+                                title="delete selected user"><i class="fas fa-trash-alt"> Delete
+                            </i>
+                        </input>
+                        </form>
+                    </td>
+                </tr>';
             }
-
-
         }
-
-
         ?>
-
-
     </table>
-
-
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
