@@ -33,16 +33,16 @@ require_once("crud.php");
             </button>
 
 
-            <input type="text" name="Username" placeholder="Azubis Username here.." class="form-control">
+            <input type="text" name="Username" placeholder="Azubis Username here.." class="form-control" required>
 
-            <input type="password" name="Password" placeholder="Azubis Password here.." class="form-control"
+            <input type="password" name="Password" placeholder="Azubis Password here.." class="form-control" required
             >
-            <input type="text" name="FirstName" placeholder="Azubis firstname here.." class="form-control">
+            <input type="text" name="FirstName" placeholder="Azubis firstname here.." class="form-control" required>
 
-            <input type="text" name="LastName" placeholder="Azubis lastname here.." class="form-control">
+            <input type="text" name="LastName" placeholder="Azubis lastname here.." class="form-control" required>
 
 
-        </form>
+
     </div>
 
     <table>
@@ -63,22 +63,20 @@ require_once("crud.php");
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) { ?>
 
-                <form action="" method="post" role="form">
-                <tr>
 
-                    <td><?php echo $row['ID']; ?></td>
-                    <td><?php echo $row['Username']; ?></td>
-                    <td><?php echo $row['Name']; ?></td>
-                    <td><?php echo $row['Lastname']; ?></td>
+                    <tr>
 
-
-                    <td><input type="checkbox" class="" name="key_to_delete" value="<?php echo $row['ID']; ?>" required>
-                    </td>
-
-                    <td class="action_buttons">
+                        <td><?php echo $row['ID']; ?></td>
+                        <td><?php echo $row['Username']; ?></td>
+                        <td><?php echo $row['Name']; ?></td>
+                        <td><?php echo $row['Lastname']; ?></td>
 
 
+                        <td><input type="checkbox" class="" name="key_to_delete" value="<?php echo $row['ID']; ?>"
+                                   required>
+                        </td>
 
+                        <td class="action_buttons">
 
 
                             <button type="submit" name="edit_button" title="edit selected user" value="edit"
@@ -92,13 +90,10 @@ require_once("crud.php");
                                     title="delete selected user"><i class="fas fa-trash-alt"></i></button>
 
 
-
-                    </td>
-
+                        </td>
 
 
-
-                </tr>
+                    </tr>
                 </form>
 
                 <?php

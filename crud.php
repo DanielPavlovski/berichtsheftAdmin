@@ -61,6 +61,32 @@ function deleteUser()
 }
 
 
+function editUser () {
+
+    $conn = createConnection();
+$id = $_POST['key_to_delete'];
+
+    $username = $_POST['Username'];
+    $password = $_POST['Password'];
+    $firstname = $_POST['FirstName'];
+    $lastname = $_POST['LastName'];
+
+
+
+    $query = "UPDATE User
+SET Username='" . $username . "', Password='" . $password . "', Name='" . $firstname . "', Lastname='" . $lastname .
+        "'WHERE id=" . $id;
+
+/*
+    $query = "UPDATE ourWebPage.`User`
+SET Username=" . $username . ", Password=".$password.", Name=".$firstname.", Lastname=".$lastname."
+WHERE ID=" . $id;
+*/
+
+$mysql = mysqli_query($conn,$query) or die (mysqli_error($conn));
+
+$conn ->close();
+}
 function readAllUsers()
 {
 
@@ -90,14 +116,16 @@ function updateUser()
 
     $conn = createConnection();
 
-    $id = $_POST['Id'];
+    $id = $_POST['key_to_delete'];
+
+
     $username = $_POST['Username'];
     $password = $_POST['Password'];
     $firstname = $_POST['FirstName'];
     $lastname = $_POST['LastName'];
 
 
-    $query = "UPDATE User
+    $query = "UPDATE ourWebPage.`User`
 SET Username='" . $username . "', Password='" . $password . "', Name='" . $firstname . "', Lastname='" . $lastname .
         "'WHERE id=" . $id;
 
@@ -121,7 +149,12 @@ function crud()
     } else if (isset($_POST['delete_button'])) {
 
         deleteUser();
-    } else if (isset($_POST['read'])) {
+    }else if (isset($_POST['edit_button']     )) {
+
+        updateUser();
+    }
+
+    else if (isset($_POST['read'])) {
         readAllUsers();
     } else if (isset($_POST['update'])) {
         updateUser();
