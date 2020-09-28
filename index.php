@@ -10,37 +10,39 @@
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <title>Document</title>
-
 </head>
 <body>
-
 <div class="container">
+    <?php
+    if ($_GET['error']) {
+        switch($_GET['errorCode']){
+            case '401':
+                $erroText="Login Data not Found!";
+                break;
+            default:
+                $erroText="Error";
+                break;
+        }
+        echo "<div class='alert alert-warning'>" . $erroText . "</div>";
+    }
+    ?>
     <div class="row">
-        <div class="col-sm"">
-
+        <div class="col-sm">
         </div>
         <div class="col-sm">
-
-            <div class="login_form"">
-
-
+            <div class="login_form">
                 <h1 id="login_name">Login</h1>
-
-                <form method="post" class="">
+                <form method="POST" action="login.php">
                     <input type="text" name="u" placeholder="Username" required="required" class="form-control"/>
                     <input type="password" name="p" placeholder="Password" required="required" class="form-control"/>
                     <button type="submit" class="btn btn-primary btn-block btn-large">Sign in</button>
                 </form>
-
             </div>
         </div>
         <div class="col-sm">
-
         </div>
     </div>
 </div>
-
-
 </body>
 </html>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
