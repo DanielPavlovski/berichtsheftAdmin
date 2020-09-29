@@ -32,7 +32,9 @@ function createUser()
     $lastname = $_POST['LastName'];
 
 
-    $query = "INSERT into User (Username,Password,Name,Lastname) values ('$username','$password','$firstname','$lastname')";
+    $query = "INSERT into Azubis (Username,Password,Name,Lastname) values ('$username','$password','$firstname','$lastname')";
+    $query = $conn->real_escape_string(htmlspecialchars(htmlentities($query)));
+    var_dump($query);
     $mysql = mysqli_query($conn, $query) or die (mysqli_error($conn));
 
 
@@ -47,7 +49,7 @@ function deleteUser()
 
     $conn = createConnection();
     $id = $_POST['key_to_delete'];
-    $query = "DELETE FROM User WHERE id = " . $id;
+    $query = "DELETE FROM Azubis WHERE id = " . $id;
     $mysql = mysqli_query($conn, $query) or die (mysqli_error($conn));
     if ($mysql) {
 
@@ -73,7 +75,7 @@ $id = $_POST['key_to_delete'];
 
 
 
-    $query = "UPDATE User
+    $query = "UPDATE Azubis
 SET Username='" . $username . "', Password='" . $password . "', Name='" . $firstname . "', Lastname='" . $lastname .
         "'WHERE id=" . $id;
 
@@ -92,7 +94,7 @@ function readAllUsers()
 
     $conn = createConnection();
     $query = "SELECT ID, Username, Password, Name, Lastname
-FROM User";
+FROM Azubis";
 
 
     $mysql = mysqli_query($conn, $query) or die (mysqli_error($conn));
@@ -125,7 +127,7 @@ function updateUser()
     $lastname = $_POST['LastName'];
 
 
-    $query = "UPDATE ourWebPage.`User`
+    $query = "UPDATE ourWebPage.`Azubis`
 SET Username='" . $username . "', Password='" . $password . "', Name='" . $firstname . "', Lastname='" . $lastname .
         "'WHERE id=" . $id;
 
