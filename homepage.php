@@ -1,6 +1,5 @@
 <?php
 
-//require_once("crud.php");
 require_once("ConnectionHandler.php");
 
 
@@ -56,7 +55,7 @@ function deleteRow(){
     $sql="DELETE FROM Azubis where id=".$_POST['delete-id'];
     $mysql = mysqli_query($con, $sql) or die (mysqli_error($con));
 
-    
+
 
     $con->close();
 }
