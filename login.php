@@ -1,7 +1,7 @@
 <?php
 require_once "ConnectionHandler.php";
 
-$con = ConnectionHandler::createConnection('berichtsheftPlayground');
+$con = ConnectionHandler::createConnection('ourWebPage');
 $username = $_POST['u'];
 $password = $_POST['p'];
 $sql = "SELECT *
