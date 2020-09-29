@@ -20,7 +20,7 @@ function createUser()
 
 
     $query = "INSERT into Azubis (Username,Password,Name,Lastname) values ('$username','$password','$firstname','$lastname')";
-    $query = $con->real_escape_string($query);
+
     $mysql = mysqli_query($con, $query) or die (mysqli_error($con));
 
 
@@ -55,7 +55,7 @@ function updateRow($username, $password, $name, $lastname, $id)
 
 function deleteUser()
 {
-    $id=$_POST['delete_button'];
+    $id=$_POST['delete-id'];
     $con = ConnectionHandler::createConnection('ourWebPage');
     $sql = "DELETE FROM Azubis where id=".$id;
     $mysql = mysqli_query($con, $sql) or die (mysqli_error($con));
@@ -107,14 +107,11 @@ if (isset($_POST['save'])) {
 
     }
 
-
-    updateRow($username, $pw, $name, $lastname, $id);
 }
 
 
 
 if(isset($_POST['delete_button'])){
-
     deleteRow();
 }
 
@@ -210,7 +207,12 @@ if(isset($_POST['delete_button'])){
                                 class="btn  btn-primary  bg-danger"
                                 title="delete selected user"><i class="fas fa-trash-alt"> Delete
                             </i>
+                      
+                      
+                      
                         </button>
+                        <input type="hidden" name="delete-id" value="' . $row['ID'] . '">
+                        
                         </form>
                     </td>
                 </tr>';
