@@ -56,6 +56,7 @@ function deleteRow(){
     $sql="DELETE FROM Azubis where id=".$_POST['delete-id'];
     $mysql = mysqli_query($con, $sql) or die (mysqli_error($con));
 
+    
 
     $con->close();
 }
