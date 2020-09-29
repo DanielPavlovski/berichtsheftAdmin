@@ -5,7 +5,7 @@ require_once("ConnectionHandler.php");
 
 function getDataById($id)
 {
-    $con = ConnectionHandler::createConnection('berichtsheftPlayground');
+    $con = ConnectionHandler::createConnection('ourWebPage');
     $result = $con->query("SELECT *
     FROM Azubis a 
     where ID = " . $_POST['edit-id']);
@@ -13,7 +13,7 @@ function getDataById($id)
 }
 
 function updateRow($username,$password,$name,$lastname,$id){
-    $con = ConnectionHandler::createConnection('berichtsheftPlayground');
+    $con = ConnectionHandler::createConnection('ourWebPage');
     $sql="update `Azubis` set `Username`=?,`Password`=?,`Name`=?,`Lastname`=? where `id`=?";
     if(!$stmt=$con->prepare($sql)){
         echo $con->error;
@@ -25,8 +25,17 @@ function updateRow($username,$password,$name,$lastname,$id){
 }
 
 function deleteRow(){
-    $con=ConnectionHandler::createConnection('berichtsheftPlayground');
-    $sql="DELETE FROM Azubis where id=?";
+    $con=ConnectionHandler::createConnection('ourWebPage');
+    $sql="DELETE FROM Azubis where id=".$_POST['delete-id'];
+    $mysql = mysqli_query($con, $sql) or die (mysqli_error($con));
+
+
+    $con->close();
+}
+
+
+if (isset($_POST['delete_button'])){
+    deleteRow();
 }
 
 $username = null;
@@ -99,6 +108,7 @@ if(isset($_POST['save-edit'])){
                 <?php echo $lastname != null ? "value= $lastname" : 'placeholder="Azubis lastname here.."'; ?>
                    class="form-control" required>
             <input type="hidden" name="id" value="<?php echo $_POST['edit-id']; ?>" />
+            <input type="hidden" name="id1" value="<?php echo $_POST['delete-id']; ?>" />
             <div class="d-flex justify-content-end">
                 <button class="btn btn-success " type="submit" name="save-<?php echo $_POST['edit_button'] ?>"><i
                             class="fas fa-save"> Save</i>
@@ -116,7 +126,7 @@ if(isset($_POST['save-edit'])){
             <th></th>
         </tr>
         <?php
-        $conn = ConnectionHandler::createConnection('berichtsheftPlayground');
+        $conn = ConnectionHandler::createConnection('ourWebPage');
         $query = "SELECT * FROM Azubis";
         $result = $conn->query($query);
         if ($result->num_rows > 0) {
@@ -141,7 +151,8 @@ if(isset($_POST['save-edit'])){
                                 class="btn  btn-primary  bg-danger"
                                 title="delete selected user"><i class="fas fa-trash-alt"> Delete
                             </i>
-                        </input>
+                      <input type="hidden" name="delete-id" value="' . $row['ID'] . '">
+                        
                         </form>
                     </td>
                 </tr>';

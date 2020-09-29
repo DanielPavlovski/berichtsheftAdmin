@@ -1,7 +1,7 @@
 body {
 
 
-    background: url('http://clevertechie.com/img/bnet-bg.jpg') #0f2439 no-repeat;
+    background: url('http://clevertechie.com/img/bnet-bg.jpg') #0f2439 no-repeat center top;
 
 
 }
@@ -42,9 +42,10 @@ input {
 
 table, td, tr, th {
 
+    border: solid black;
+    border-bottom: black solid;
 
-
-    color: white;
+    background-color: white;
 
 }
 
@@ -62,18 +63,5 @@ h1 {
 
 
 .action_buttons {
-
-background-color: unset;
-}
-
-input[type='checkbox'] {
-    -webkit-appearance:none;
-    width:30px;
-    height:30px;
-    background:white;
-    border-radius:5px;
-    border:2px solid #555;
-}
-input[type='checkbox']:checked {
-    background: red;
+    background-color:rgba(0, 0, 0, 0.5)
 }
