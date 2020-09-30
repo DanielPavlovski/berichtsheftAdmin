@@ -4,6 +4,7 @@ body {
     background: url('http://clevertechie.com/img/bnet-bg.jpg') #0f2439 no-repeat;
 
 
+
 }
 
 
@@ -13,6 +14,11 @@ body {
 }
 
 input {
+    width: 100%;
+}
+
+textarea {
+
     width: 100%;
 }
 
@@ -66,14 +72,15 @@ h1 {
 background-color: unset;
 }
 
-input[type='checkbox'] {
-    -webkit-appearance:none;
-    width:30px;
-    height:30px;
-    background:white;
-    border-radius:5px;
-    border:2px solid #555;
+#text {
+    width: 65%;
 }
-input[type='checkbox']:checked {
-    background: red;
+
+#date {
+    width: 15%;
+}
+textarea {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }

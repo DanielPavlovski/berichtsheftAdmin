@@ -19,9 +19,16 @@ function createUser()
     $lastname = $_POST['LastName'];
 
 
+
+
     $query = "INSERT into Azubis (Username,Password,Name,Lastname) values ('$username','$password','$firstname','$lastname')";
 
-    $mysql = mysqli_query($con, $query) or die (mysqli_error($con));
+
+
+        $mysql = mysqli_query($con, $query) or die (mysqli_error($con));
+
+
+
 
 
 
@@ -233,4 +240,3 @@ if(isset($_POST['delete_button'])){
         crossorigin="anonymous"></script>
 </body>
 </html>
-
