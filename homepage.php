@@ -132,7 +132,7 @@ if(isset($_POST['delete_button'])){
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="homepageCss.css">
     <script src="https://kit.fontawesome.com/abbbcfcd25.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
@@ -146,7 +146,7 @@ if(isset($_POST['delete_button'])){
 <div class="container">
     <div class="row">
         <div class="col-12 d-flex justify-content-center">
-            <h1>ADMIN PANEL</h1>
+            <h1><br>ADMIN PANEL</h1>
         </div>
     </div>
     <div class="login_form_home">
