@@ -117,7 +117,8 @@ if (isset($_POST['save'])) {
         createBerichte();
     } else {
 
-        UpdateRow($text, $datum, $userIdNeu, $id);
+
+        UpdateRow($_POST['input_area'], $datum, $userIdNeu, $_POST['id']);
 
     }
 }
@@ -195,6 +196,7 @@ if (isset($_POST['save'])) {
                             class="fas fa-save"> Save</i>
                 </button>
             </div>
+        </form>
     </div>
 
     <table>
