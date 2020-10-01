@@ -13,6 +13,7 @@ class ConnectionHandler
         mysqli_set_charset($conn, 'UTF8');
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
+            die("Connection failed: " . $conn->connect_error);
         }
         return $conn;
     }

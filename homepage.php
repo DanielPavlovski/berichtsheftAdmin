@@ -19,8 +19,16 @@ function createUser()
     $lastname = $_POST['LastName'];
 
 
+
+
     $query = "INSERT into Azubis (Username,Password,Name,Lastname) values ('$username','$password','$firstname','$lastname')";
-    $mysql = mysqli_query($con, $query) or die (mysqli_error($con));
+
+
+
+        $mysql = mysqli_query($con, $query) or die (mysqli_error($con));
+
+
+
 
 
 
@@ -39,7 +47,8 @@ function getDataById($id)
     return $result->fetch_assoc();
 }
 
-function updateRow($username,$password,$name,$lastname,$id){
+function updateRow($username, $password, $name, $lastname, $id)
+{
     $con = ConnectionHandler::createConnection('ourWebPage');
     $sql = "update `Azubis` set `Username`=?,`Password`=?,`Name`=?,`Lastname`=? where `id`=?";
     if (!$stmt = $con->prepare($sql)) {
@@ -51,20 +60,28 @@ function updateRow($username,$password,$name,$lastname,$id){
 
 }
 
+function deleteUser()
+{
+    $id=$_POST['delete-id'];
+    $con = ConnectionHandler::createConnection('ourWebPage');
+    $sql = "DELETE FROM Azubis where id=".$id;
+    $mysql = mysqli_query($con, $sql) or die (mysqli_error($con));
+    $con->close();
+
+
+}
+
+
+
 function deleteRow(){
     $con=ConnectionHandler::createConnection('ourWebPage');
     $sql="DELETE FROM Azubis where id=".$_POST['delete-id'];
     $mysql = mysqli_query($con, $sql) or die (mysqli_error($con));
 
-    
-
     $con->close();
 }
 
 
-if (isset($_POST['delete_button'])){
-    deleteRow();
-}
 
 $username = null;
 $pw = null;
@@ -97,13 +114,13 @@ if (isset($_POST['save'])) {
 
     }
 
-
-    updateRow($username, $pw, $name, $lastname, $id);
 }
 
 
 
-
+if(isset($_POST['delete_button'])){
+    deleteRow();
+}
 
 
 ?>
@@ -115,7 +132,7 @@ if (isset($_POST['save'])) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="homepageCss.css">
     <script src="https://kit.fontawesome.com/abbbcfcd25.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
@@ -129,7 +146,7 @@ if (isset($_POST['save'])) {
 <div class="container">
     <div class="row">
         <div class="col-12 d-flex justify-content-center">
-            <h1>ADMIN PANEL</h1>
+            <h1><br>ADMIN PANEL</h1>
         </div>
     </div>
     <div class="login_form_home">
@@ -197,8 +214,11 @@ if (isset($_POST['save'])) {
                                 class="btn  btn-primary  bg-danger"
                                 title="delete selected user"><i class="fas fa-trash-alt"> Delete
                             </i>
+                      
+                      
+                      
                         </button>
-                      <input type="hidden" name="delete-id" value="' . $row['ID'] . '">
+                        <input type="hidden" name="delete-id" value="' . $row['ID'] . '">
                         
                         </form>
                     </td>
@@ -220,4 +240,3 @@ if (isset($_POST['save'])) {
         crossorigin="anonymous"></script>
 </body>
 </html>
-
